@@ -26,8 +26,8 @@ def add_starfighter():
     starfighters.append(new_fighter)
     return jsonify(starfighters), 201
 
-@app.route('/starfighters', methods=['PUT'])
-def update_starfighter():
+@app.route('/starfighters/<int:id>', methods=['PUT'])
+def update_starfighter(id):
     updated_fighter = request.get_json()
     for f in starfighters:
         if f['id'] == id:
@@ -35,8 +35,8 @@ def update_starfighter():
             return jsonify(starfighters)
     return {"error": "Not found"}, 404
 
-@app.route('/starfighters', methods=['DELETE'])
-def delete_starfighter():
+@app.route('/starfighters/<int:id>', methods=['DELETE'])
+def delete_starfighter(id):
     global starfighters
     starfighters = [f for f in starfighters if f['id'] != id]
     return '', 201
